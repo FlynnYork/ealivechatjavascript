@@ -88,8 +88,8 @@ def mycardAccount(paymentContent):  # 提取MyCard付费账户信息
     return myaccount, mypwd, secCode
 def user_info(userContent): # 提取购买游戏的账户信息
     '''python默认使用unicode作为解码'''
-    # user_account    = userContent.decode('gbk')  #从命令行输入使用gbk解码成unicode
-    user_account    = userContent.decode('utf-8')  #从文本读取使用utf-8解码成unicode
+    user_account    = userContent.decode('gbk')  #从命令行输入使用gbk解码成unicode
+    # user_account    = userContent.decode('utf-8')  #从文本读取使用utf-8解码成unicode
     '''先将回车符，换行符，制表符都换成空格再用RE方法去除多余空格'''
     user_account    = user_account.replace('\r','').replace('\n',' ').replace('\t',' ') 
     user_account    = re.sub(ur'[帳賬號密碼秘注册账户帐号登录陆密码这是第一个邮箱已未读橘子我的/，：；。,:; ]+', " ", user_account) #最后一位是空格过滤
@@ -796,7 +796,7 @@ if __name__ == '__main__':
     payment_account = 'fulun7431@163.com    qq123123    w232'
     
     '''在Windows命令行中有中文输入时，字符转成unicode模式，再encode加密成utf-8模式，方便后期函数统一调用'''
-    user_account    = (u'%s'%raw_input('Please input user account info.\n\n\n')).encode('utf-8')
+    user_account    = raw_input('Please input user account info.\n\n\n')
     user_account = user_info(user_account)  # 元组
     shoppingGame = ea(user_account, payment_account).shopping()
     mycard = mycard(payment_account)
